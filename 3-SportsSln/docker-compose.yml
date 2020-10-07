@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:latest
+    environment:
+      SA_PASSWORD: "testing"
+      ACCEPT_EULA: "Y"
+  store:
+    build:
+      context: .
+      dockerfile: SportsStore/Dockerfile.dev
+    depends_on:
+      - db
