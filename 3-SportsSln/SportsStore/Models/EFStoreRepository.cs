@@ -1,9 +1,9 @@
 using System.Linq;
 
 namespace SportsStore.Models {
-    public class EfStoreRepository : IStoreRepository {
+    public class EFStoreRepository : IStoreRepository {
         private StoreDbContext context;
-        public EfStoreRepository(StoreDbContext ctx) {
+        public EFStoreRepository(StoreDbContext ctx) {
             context = ctx;
         }
         public IQueryable<Product> Products => context.Products;
