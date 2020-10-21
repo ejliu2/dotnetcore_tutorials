@@ -12,9 +12,10 @@ namespace SportsStore.Controllers {
             repository = repo;
         }
 
-        public ViewResult Index(int productPage = 1)
+        public ViewResult Index(string category, int productPage = 1)
            => View(new ProductsListViewModel {
                Products = repository.Products
+                   .Where(productPage => category == null || productPage.Category == category)
                    .OrderBy(p => p.ProductID)
                    .Skip((productPage - 1) * PageSize)
                    .Take(PageSize),
