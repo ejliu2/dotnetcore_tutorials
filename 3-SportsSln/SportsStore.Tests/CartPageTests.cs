@@ -1,25 +1,15 @@
-using
-using
-using
-using
-using
-using
-using
-using
-using
-using
-using
-Microsoft.AspNetCore.Http;
-Microsoft.AspNetCore.Mvc;
-Microsoft.AspNetCore.Mvc.RazorPages;
-Microsoft.AspNetCore.Routing;
-Moq;
-SportsStore.Models;
-SportsStore.Pages;
-System.Linq;
-System.Text;
-System.Text.Json;
-Xunit;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Routing;
+using Moq;
+using SportsStore.Models;
+using SportsStore.Pages;
+using System.Linq;
+using System.Text;
+using System.Text.Json;
+using Xunit;
+
 namespace SportsStore.Tests {
     public class CartPageTests {
         [Fact]
@@ -94,6 +84,5 @@ namespace SportsStore.Tests {
                 Assert.Equal("P1", testCart.Lines.First().Product.Name);
                 Assert.Equal(1, testCart.Lines.First().Quantity);
             }
-        }
     }
 }
