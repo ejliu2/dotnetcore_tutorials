@@ -9,6 +9,7 @@ using Xunit;
 namespace SportsStore.Tests {
     public class NavigationMenuViewComponentTests {
         public class NavigationMenuViewComponentTests {
+
             [Fact]
             public void Can_Select_Categories() {
                 // Arrange
@@ -27,6 +28,31 @@ namespace SportsStore.Tests {
 
                 // Assert
                 Assert.True(Enumerable.SequenceEqual(new string[] { "Apples", "Oranges", "Plums" }, results ));
+            }
+
+            [Fact]
+            public void Indicates_Selected_Category() {
+                // Arrange
+                string categoryToSelect = "Apples";
+                Mock<IStoreRepository> mock = new Mock<IStoreRepository>();
+                mock.Setup(m => m.Products).Returns((new Product[] {
+                    new Product {productID = 1, Name = "P1", Category = "Apples"},
+                    new Product {productID = 4, Name = "P2", Category = "Oranges"},
+                }).AsQueryable<Product>());
+
+                NavigationMenuViewComponent target = new NavigationMenuViewCOmponent(mock.Object);
+                target.ViewComponentContext = new ViewComponnetContext {
+                    ViewContext = new ViewContext {
+                        RouteData = new Microsoft.Asp.NetCore.Routing.RouteData()
+                    }
+                };
+                target.RouteData.Values["category"] = categoryToSelect;
+
+                // Action
+                string result = (string)(target.Invoke() as ViewViewComponentResult).ViewData["SelectedCategory"];
+
+                // Assert
+                Assert.Equal(categoryToSelect, result);
             }
         }
     }
